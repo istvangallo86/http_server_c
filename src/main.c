@@ -151,25 +151,6 @@ void *async_request_handler(void *args) {
 		fclose(fp);
 		respondToBrowser(local_args.socket_id, "image/png", png_file, file_size);
 
-	} else if(
-		strcmp(method, "GET") == 0 &&
-		strcmp(url, "/get-system-status") == 0) {
-
-		char json_string[2048];
-		time_t t = time(NULL);
-		struct tm tm = *localtime(&t);
-
-		snprintf(json_string, sizeof(json_string),
-			"{"
-				"\"system_time\": \"%02d:%02d:%02d\"}",
-
-			tm.tm_hour,
-			tm.tm_min,
-			tm.tm_sec);
-
-		respondToBrowser(local_args.socket_id, "application/json", json_string,
-			strlen(json_string));
-
 	} else {
 		char *body_stream = readTextFile("web/error_404.htm");
 		respondToBrowser(
