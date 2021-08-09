@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+	<title>SubAkvarium</title>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<script src="/public/js/axios.min.js"></script>
+		<script src="/public/js/jquery-3.3.1.min.js"></script>
+		
+		<link rel="stylesheet" type="text/css" href="/public/css/bulma.css">
+		<link rel="manifest" href="/public/manifest.json">
+	</head>
+	<div id="main" class="">
+		<div class="section" 
+			style="
+				margin: 0 auto;
+				padding: 0;
+				text-align: center;
+				height: auto; 
+				min-height: 75px;">
+
+		<div id="content">
+			<div class="section">
+				<div class="subtitle">System Status</div>
+				<div>System time: <div id="system_time"></div></div>
+				<br>
+				<div class="box" id="day_lights_button">Day lights: 
+					<div id="day_light_status"></div>
+				</div>
+				
+				<div class="box" id="night_lights_button">Night lights: 
+					<div id="night_light_status"></div>
+				</div>
+				
+				<div class="box" id="pumps_button">Water pumps: 
+					<div id="pumps_status"></div>
+				</div>
+
+				<div class="box" id="auto_mode_button">Auto mode:
+                    <div id="auto_mode_status"></div>
+                </div>
+			</div>
+		</div>
+		<script>
+			function getSystemStatus() {
+				axios.get("/get-system-status").then(function (response) {
+					$("#system_time").html(response.data.system_time);
+					if(response.data.day_light == 1) {
+						$("#day_light_status").html("ON");
+						$("#day_light_status")
+							.css("background-color", "yellow");
+					} else {
+						$("#day_light_status").html("OFF");
+						$("#day_light_status")
+							.css("background-color", "grey");
+					}
+					
+					if(response.data.night_light == 1) {
+						$("#night_light_status").html("ON");
+						$("#night_light_status")
+							.css("background-color", "yellow");
+					} else {
+						$("#night_light_status").html("OFF");
+						$("#night_light_status")
+							.css("background-color", "grey");
+					}
+					
+					if(response.data.pumps_status == 1) {
+						$("#pumps_status").html("ON");
+						$("#pumps_status")
+							.css("background-color", "yellow");
+					} else {
+						$("#pumps_status").html("OFF");
+						$("#pumps_status")
+							.css("background-color", "grey");
+					}
+
+					if(response.data.auto_mode == 1) {
+						$("#auto_mode_status").html("ON");
+						$("#auto_mode_status")
+							.css("background-color", "yellow");
+					} else {
+						$("#auto_mode_status").html("OFF");
+						$("#auto_mode_status")
+							.css("background-color", "grey");
+					}                       
+				}).catch(function (error) {
+					console.log(error);
+				});
+			}
+		
+			$(function() {
+				getSystemStatus();
+				$("div#day_lights_button").click(function() {
+					axios.get("/change-day-light").then(function (response) {
+						;;
+					}).catch(function (error) {
+						console.log(error);
+					});
+				});
+				
+				$("div#night_lights_button").click(function() {
+					axios.get("/change-night-light").then(function (response) {
+						;;
+					}).catch(function (error) {
+						console.log(error);
+					});
+				});
+				
+				$("div#pumps_button").click(function() {
+					axios.get("/change-pumps-state").then(function (response) {
+						;;
+					}).catch(function (error) {
+						console.log(error);
+					});
+				});
+							
+				$("div#auto_mode_button").click(function() {
+					axios.get("/change-auto-mode").then(function (response) {
+						;;
+					}).catch(function (error) {
+						console.log(error);
+					});
+				});
+				
+				setInterval(function() {
+					getSystemStatus();	
+				}, 1000);
+			});
+			
+		</script>
+	</body>
+	Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+</html>
