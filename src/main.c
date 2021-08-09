@@ -28,7 +28,7 @@ void *async_request_handler(void *args) {
 	struct handlerArgs local_args = *(struct handlerArgs*)args;
 	free(args);
 	char method[10];
-	char url[1024];
+	char url[2048];
 
 	if(getRequestMethod(local_args.request, method) < 0) {
 		log_this(
