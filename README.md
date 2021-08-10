@@ -4,6 +4,8 @@ This project is experimental. This is only for hobby purpose, there is absolute 
 
 Tested on Linux with gcc 9.4 and on Windows with Cygwing.
 
-Compile with "gcc src/* -o server.bin" command, run with "./server.bin" and check with your browser the address http://127.0.0.1:8000
+Compile with "gcc src/* -o server.bin" command, run with "./server.bin" and check with your browser the address http://127.0.0.1:8000.
+
+Place your assets within "web/public" folder into the relevant subfolder. 
 
 Good luck.
