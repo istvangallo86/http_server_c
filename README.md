@@ -1,5 +1,5 @@
 # http_server_c
-A HTTP server template for simple web apps implemented in C programming language with UNIX sockets. Every request handled in a separate thread to increase the performance and turn the backend into a multithreaded server!
+A HTTP server template for simple web apps implemented in C programming language with sockets. Every request handled in a separate thread to increase the performance and turn the backend into a multithreaded server!
 This project is experimental and only for hobby purpose, there is absolute no warranty granted for this code to work.
 
 Tested on Linux with gcc 9.4 and on Windows with Cygwin.
